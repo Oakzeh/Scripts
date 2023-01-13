@@ -76,10 +76,24 @@ mkdir "C:\Users\$env:UserName\Desktop\Artifects\Chrome\Default" -Force
 #Creating folder for Default
 
 }
-#Copies Cookies Artifact
+#Copies Cookies
 if (Test-Path "$path\Default\Network\cookies") {
 Copy-Item -path "$path\Default\Network\cookies" -destination "C:\Users\$env:UserName\Desktop\Artifects\Chrome\Default\cookies" #-Force
-Write-Output "Nom Nom Nom... Cookies Copied Successfully"
+Write-Output "Nom Nom Nom... Cookies Copied Successfully" }
+
+#Copies Custom Dictionary
+if (Test-Path "$path\Default\Custom Dictionary.txt") {
+Copy-Item -path "$path\Default\Custom Dictionary.txt" -destination "C:\Users\$env:UserName\Desktop\Artifects\Chrome\Default\Custom Dictionary.txt" #-Force
+Write-Output "Custom Dictionary Copied Successfully"
+
+$Default = @("History", "Visited Links", "Web Data", "Top Sites", "Custom Dictionary.txt","Shortcuts", 'Bookmarks', "Preferences", "Login Data", "Media History")
+#Array of Default folder Artifatcs
+
+foreach($artifact in $Default){
+Copy-Item -path "$path\Default\$artifact" -destination "C:\Users\$env:UserName\Desktop\Artifects\Chrome\Default\"
+Write-Output "$artifact Copied Successfully"
+}
+
 }
 }
 
