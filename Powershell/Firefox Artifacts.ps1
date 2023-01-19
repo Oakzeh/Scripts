@@ -23,8 +23,8 @@ foreach ($profile in $ffprofiles) {
         if (test-path "$ffpath$profile\$art") {
             Copy-Item -Path "$ffpath$profile\$art" -Destination "C:\Users\$env:UserName\Desktop\Artifacts\Firefox\$profile\" -Force
             Write-Host "$profile $art Copied Successfully!"
+            #nested for loop checking if artifact path is valid then copying to specified folder
         }
-#nested for loop checking if artifact path is valid then copying to specified folder
     }
 }
 }
