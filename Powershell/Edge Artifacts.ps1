@@ -1,4 +1,4 @@
-﻿### FIREFOX ### 
+﻿### edge ### 
 $edge = Test-Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\msedge.exe'
 #Checking if Firefox is Installed
 
@@ -31,9 +31,7 @@ if($edge){
             }
             catch {
                 Write-Warning -Message $Error[0]
-            }
-
-    #nested for loop checking if artifact path is valid then copying to specified folder
+            }    #nested for loop checking if artifact path is valid then copying to specified folder
         }
     }
     
