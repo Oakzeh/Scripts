@@ -1,9 +1,11 @@
-﻿### edge ### 
+﻿### Edge ### 
 $edge = Test-Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\msedge.exe'
-#Checking if Firefox is Installed
+#Checking if Edge is Installed
+
+$location = Get-Location
 
 if($edge){
-    mkdir "C:\Users\$env:UserName\Desktop\Artifacts\Edge" -Force
+    mkdir "$location\Artifacts\Edge" -Force
     #Creating Edge Sub Folder
     
     $edgepath = "C:\Users\$env:UserName\AppData\Local\Microsoft\Edge\User Data\"
@@ -18,20 +20,22 @@ if($edge){
 
     foreach ($profile in $eprofiles) {
         if (Test-Path -path "$edgepath$profile") {
-            mkdir "C:\Users\$env:UserName\Desktop\Artifacts\Edge\$profile" -Force
+            mkdir "$location\Artifacts\Edge\$profile" -Force
         }
 
         #Making Profile Folder
         foreach($art in $edgeArtifacts) {
             try {
                 if (test-path "$edgepath$profile\$art") {
-                    Copy-Item -Path "$edgepath$profile\$art" -Destination "C:\Users\$env:UserName\Desktop\Artifacts\Edge\$profile\" -Recurse -Force
+                    Copy-Item -Path "$edgepath$profile\$art" -Destination "$location\Artifacts\Edge\$profile\" -Recurse -Force
                     Write-Host "$profile - $art Copied Successfully"
                 }         
             }
             catch {
                 Write-Warning -Message $Error[0]
-            }    #nested for loop checking if artifact path is valid then copying to specified folder
+            }
+
+    #nested for loop checking if artifact path is valid then copying to specified folder
         }
     }
     
